@@ -7089,7 +7089,7 @@ end)
             end
         end)
 		local raid = server:Channel("Raid + Esp") 
-		raid:Toggle("Auto Raid",false,function(t)
+		raid:Toggle("Auto Dong gyun",false,function(t)
 			_G.autoraid = t
 		end)
 		spawn(function()
