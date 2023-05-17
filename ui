@@ -1,0 +1,68 @@
+	-- Gui to Lua
+	-- Version: 3.2
+
+	-- Instances:
+
+	local ScreenGui = Instance.new("ScreenGui")
+	local Frame = Instance.new("Frame")
+	local fast = Instance.new("TextButton")
+	local turnOff = Instance.new("TextButton")
+	local turnOn = Instance.new("TextButton")
+	local Name = Instance.new("TextLabel")
+
+	--Properties:
+
+	ScreenGui.Parent = game.Workspace
+
+	Frame.Parent = ScreenGui
+	Frame.BackgroundColor3 = Color3.fromRGB(135, 191, 169)
+	Frame.BorderSizePixel = 4
+	Frame.Position = UDim2.new(0.356119066, 0, 0.318897694, 0)
+	Frame.Size = UDim2.new(0, 260, 0, 183)
+
+	fast.Name = "fast"
+	fast.Parent = Frame
+	fast.BackgroundColor3 = Color3.fromRGB(135, 191, 169)
+	fast.BorderSizePixel = 2
+	fast.Position = UDim2.new(-0.0015732348, 0, 0.747364521, 0)
+	fast.Size = UDim2.new(0, 260, 0, 33)
+	fast.Font = Enum.Font.Unknown
+	fast.Text = "Fast Attack"
+	fast.TextColor3 = Color3.fromRGB(0, 0, 0)
+	fast.TextSize = 20.000
+	fast.TextWrapped = true
+
+	turnOff.Name = "turnOff"
+	turnOff.Parent = Frame
+	turnOff.BackgroundColor3 = Color3.fromRGB(135, 191, 169)
+	turnOff.BorderSizePixel = 2
+	turnOff.Position = UDim2.new(-0.00157324993, 0, 0.479604989, 0)
+	turnOff.Size = UDim2.new(0, 260, 0, 33)
+	turnOff.Font = Enum.Font.Unknown
+	turnOff.Text = "Off"
+	turnOff.TextColor3 = Color3.fromRGB(0, 0, 0)
+	turnOff.TextSize = 20.000
+	turnOff.TextWrapped = true
+
+	turnOn.Name = "turnOn"
+	turnOn.Parent = Frame
+	turnOn.BackgroundColor3 = Color3.fromRGB(135, 191, 169)
+	turnOn.BorderSizePixel = 2
+	turnOn.Position = UDim2.new(-0.0015732348, 0, 0.226711407, 0)
+	turnOn.Size = UDim2.new(0, 260, 0, 33)
+	turnOn.Font = Enum.Font.Unknown
+	turnOn.Text = "On"
+	turnOn.TextColor3 = Color3.fromRGB(0, 0, 0)
+	turnOn.TextSize = 20.000
+	turnOn.TextWrapped = true
+
+	Name.Name = "Name"
+	Name.Parent = Frame
+	Name.BackgroundColor3 = Color3.fromRGB(135, 191, 169)
+	Name.BorderSizePixel = 2
+	Name.Position = UDim2.new(0.00337544084, 0, -0.00350674987, 0)
+	Name.Size = UDim2.new(0, 259, 0, 33)
+	Name.Font = Enum.Font.Unknown
+	Name.Text = "AUTO CHEST"
+	Name.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Name.TextSize = 30.000
