@@ -1,0 +1,5 @@
+while true do
+
+SendPacket(2, "action|input\n|text|/vsb COME FREE BFG FOR ALL PLAYERS HERE (HAVE UNLI STOCK)T")
+Sleep(181000)
+end

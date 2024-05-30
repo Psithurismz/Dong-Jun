@@ -1,0 +1,30 @@
+count = 1
+
+function msHookBuy(var)
+if var[0]:find("OnDialogRequest")then
+if var[1]:find("machine") then
+x = var[1]:match("embed_data|tilex|(%d+)")
+y = var[1]:match("embed_data|tiley|(%d+)")
+price = var[1]:match("embed_data|expectprice|(%d+)")
+item = var[1]:match("embed_data|expectitem|(%d+)")
+SendPacket(2, "action|dialog_return\ndialog_name|vending\ntilex|"..x.."|\ntiley|"..y.."|\nverify|1|\nbuycount|"..count.."|\nexpectprice|"..price.."|\nexpectitem|"..item.."|\n")
+return true
+end
+return false
+end
+
+if var[0]:find("OnConsoleMessage") then
+if var[1]:find("`9Sharp bought") then
+SendPacket(3, "action|quit_to_exit")
+return true
+end
+end
+end
+
+
+AddCallback("Hook", "OnVarlist", msHookBuy)
+
+
+
+
+

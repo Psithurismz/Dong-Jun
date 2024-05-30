@@ -1,0 +1,44 @@
+x = GetLocal().pos_x // 32
+y = GetLocal().pos_y // 32
+pkt = [[
+    action|dialog_return
+dialog_name|purchase_item
+buyitembyrarityid_180|1
+]]
+
+pkt2 = [[
+action|dialog_return
+dialog_name|store_buy_confirm
+]]
+
+pkt3 = [[
+action|dialog_return
+dialog_name|vending
+tilex|]]..x..[[|
+tiley|]]..y..[[|
+buttonClicked|addstock
+
+setprice|1
+chk_peritem|1
+chk_perlock|0
+]]
+
+function hook(varlist, packet)
+	if varlist[0]:find("OnDialogRequest") then
+        if  varlist[1]:find("`wPurchase Confirmation") then
+            SendPacket(2, pkt2)
+            return true
+        end
+        return false
+	end
+end
+
+AddCallback("Hook", "OnVarlist", hook)
+
+while true do
+SendPacket(2, pkt)
+Sleep(500)
+SendPacket(2, pkt3)
+end
+
+

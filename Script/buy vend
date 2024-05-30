@@ -1,0 +1,1 @@
+while true do SendPacket(2, "action|buy\nitem|vending_machine\n") Sleep(200) end

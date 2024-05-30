@@ -1,0 +1,67 @@
+function niiga(id)
+    for _, item in pairs(GetInventory()) do
+        if item.id == id then
+            return item.count
+        end
+    end
+return 0
+end
+
+function varis(var)
+    if var[0]:find("OnDialogRequest") then
+if var[1]:find("`wPurchase Confirmation") then
+    SendPacket(2, "action|dialog_return\ndialog_name|store_buy_confirm\n")
+return true
+end
+return false
+end
+end
+
+AddCallback("test", "OnVarlist", varis)
+
+while true do
+Sleep(1000)
+if niiga(1258) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1258|1\n")
+Sleep(3000)
+elseif niiga(1260) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1260|1\n")
+Sleep(3000)
+elseif niiga(1262) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1262|1\n")
+Sleep(3000)
+elseif niiga(1264) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1264|1\n")
+Sleep(3000)
+elseif niiga(1266) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1266|1\n")
+Sleep(3000)
+elseif niiga(1268) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1268|1\n")
+Sleep(3000)
+elseif niiga(1270) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_1270|1\n")
+Sleep(3000)
+elseif niiga(4308) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_4308|1\n")
+Sleep(3000)
+elseif niiga(4310) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_4310|1\n")
+Sleep(3000)
+elseif niiga(4312) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_4312|1\n")
+Sleep(3000)
+elseif niiga(4314) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_4314|1\n")
+Sleep(3000)
+elseif niiga(4316) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_4316|1\n")
+Sleep(3000)
+elseif niiga(4318) <= 10 then
+SendPacket(2, "action|dialog_return\ndialog_name|purchase_item\nbuyitembyrarityid_4318|1\n")
+Sleep(3000)
+else
+Sleep(1000)
+end
+end
+

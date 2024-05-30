@@ -1,0 +1,84 @@
+settings = {
+    baitid = 2914, -- id of bait to use (DEFAULT: 2914 (wiggly worm))
+    delay = 1000, -- delay, increase / decrease if misses (DEFAULT: 1000)
+}
+
+set = {
+    baitid = settings.baitid,
+    delay = settings.delay
+}
+
+function place(x, y, id)
+    local pkt = {}
+    pkt.type = 3
+    pkt.flags = 2560
+    pkt.int_data = id
+    pkt.int_x = x
+    pkt.int_y = y
+    pkt.pos_x = x * 32
+    pkt.pos_y = y * 32
+    SendPacketRaw(pkt)
+end
+
+function overlayText(text)
+    local var = {}
+    var[0] = "OnTextOverlay"
+    var[1] = text
+    var.netid = -1
+    SendVarlist(var)
+end
+
+function calculateDistance(x1, y1, x2, y2)
+    local dx = x2 - x1
+    local dy = y2 - y1
+    return math.sqrt(dx * dx + dy * dy)
+end
+
+-- get closest water
+local waterspots = {}
+
+for _,v in ipairs(GetTiles()) do
+    if v.water then
+        table.insert(waterspots, v)
+    end
+end
+
+local closestwaterdis = 99999
+local closestwater = GetTile(1,1)
+local curx = GetLocal().pos_x / 32
+local cury = GetLocal().pos_y / 32
+for _,v in ipairs(waterspots) do
+    local distance = calculateDistance(curx, cury, v.pos_x, v.pos_y)
+    if distance < closestwaterdis then
+        closestwater = v
+        closestwaterdis = distance
+    end
+end
+
+
+FindPath(closestwater.pos_x - 1, closestwater.pos_y - 1)
+EditToggle("modfly", false)
+Sleep(100)
+local curx = GetLocal().pos_x / 32 + 1
+local cury = GetLocal().pos_y / 32 + 1
+
+-- loop
+gofish = true
+
+AddCallback("fishing", "OnVarlist", function(vlist)
+    if vlist[0] == "OnPlayPositioned" and vlist[1] == "audio/splash.wav" then
+        place(curx, cury, set.baitid)
+        gofish = true
+        Sleep(250)
+    end
+end)
+
+while GetItemCount(set.baitid) > 0 do
+    if gofish then
+        Sleep(set.delay)
+        place(curx, cury, set.baitid)
+        gofish = false
+        Sleep(1000)
+    end
+    Sleep(100)
+end

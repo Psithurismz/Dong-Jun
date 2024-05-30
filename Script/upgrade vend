@@ -1,0 +1,30 @@
+
+
+function plant()
+for _, tile in pairs(GetTiles())  do
+if tile.fg == 2978  then
+log(x)
+FindPath(tile.pos_x,tile.pos_y)
+Sleep(200)
+pkt = [[
+action|dialog_return
+dialog_name|vending
+tilex|]]..tile.pos_x..[[|
+tiley|]]..tile.pos_y..[[|
+buttonClicked|upgradedigital
+
+]]
+
+SendPacket(2, pkt)
+end
+end
+end
+
+while true do pcall(plant(), 1) end
+
+
+
+
+
+
+

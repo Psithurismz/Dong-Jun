@@ -1,0 +1,43 @@
+
+function punch(x,y)
+    local v9 = {}
+    v9.type = 3
+    v9.int_data = 32
+    v9.pos_x = GetLocal().pos_x
+    v9.pos_y = GetLocal().pos_y
+    v9.int_x = GetLocal().pos_x // 32 +x
+    v9.int_y = GetLocal().pos_y // 32 +y
+    SendPacketRaw(v9)
+end
+
+
+
+function f(var)
+if var[0]:find("OnConsoleMessage") then
+if var[1]:find("World `wDAILYPOTOGOLD") then
+RunThread(function()
+Sleep(200)
+FindPath(13,50)
+Sleep(100)
+punch(0,0)
+end)
+return true
+end
+
+if var[1]:find("World `wPLACE") then
+RunThread(function()
+Sleep(1000)
+SendPacket(2, "action|dialog_return\ndialog_name|itemaddedtosucker\ntilex|1|\ntiley|51|\nitemtoadd|200\n")
+end)
+return true
+end
+end
+end
+
+AddCallback("Hook", "OnVarlist", f)
+
+
+
+
+
+

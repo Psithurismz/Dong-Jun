@@ -1,0 +1,24 @@
+function punch(x,y,id)
+    local v9 = {}
+    v9.type = 3
+    v9.int_data = id
+    v9.pos_x = GetLocal().pos_x
+    v9.pos_y = GetLocal().pos_y
+    v9.int_x = GetLocal().pos_x // 32 +x
+    v9.int_y = GetLocal().pos_y // 32 +y
+    SendPacketRaw(v9)
+end
+
+while true do 
+if (GetLocal().pos_x // 32 == 8 and GetLocal().pos_y // 32 == 53) then
+punch(1,0,5640) Sleep(60) punch(1,0,18)
+else
+Sleep(2000)
+SendPacket(2, "action|dialog_return\ndialog_name|itemsucker_block\ntilex|1|\ntiley|51|\nbuttonClicked|getplantationdevice\n")
+Sleep(2000)
+FindPath(8,53)
+end
+end
+
+
+

@@ -1,0 +1,20 @@
+function collectoid(oid,x,y)
+    local p = {
+        type = 11,
+        int_data = oid,
+        pos_x = x,
+        pos_y = y
+    }
+    SendPacketRaw(p)
+end
+
+function collect()
+    for _, v in pairs(GetObjects()) do
+        if GetTile(v.pos_x / 32, v.pos_y / 32).fg ~= 2488 then
+            collectoid(v.oid, v.pos_x, v.pos_y)
+            Sleep(3)
+        end
+    end
+end
+
+collect()

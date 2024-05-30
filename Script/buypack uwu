@@ -1,0 +1,86 @@
+--[[
+
+░█▀▀░█▀▀░█▀▄░▀█▀░█▀█░▀█▀░░░█▀▄░█░█░░░█░█░█▀█░█▀▀░█▀▀░█▀█░▀█▀
+░▀▀█░█░░░█▀▄░░█░░█▀▀░░█░░░░█▀▄░░█░░░░▀▄▀░█▀█░█░░░█░░░█▀█░░█░
+░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░░░░▀░░░░▀▀░░░▀░░░░░▀░░▀░▀░▀▀▀░▀▀▀░▀░▀░░▀░
+
+dsc.gg/vaccatsc
+
+Commission for Dice
+
+Usage: run the script
+]]
+
+pack = "fish" -- put "fish" or "paint"
+
+-- script starts here
+
+fishpack = {2912, 5522, 3002, 3004}
+fishprice = 10000
+paintpack = {3494, 3478, 3480, 3482, 3484, 3486, 3488, 3490, 3492}
+paintprice = 15000
+
+function chat(message)
+    SendPacket(2, "action|input\n|text|" .. message)
+end
+
+function log(text)
+    local var = {}
+    var[0] = "OnTextOverlay"
+    var[1] = text
+    var.netid = -1
+    SendVarlist(var)
+
+    local packet = {}
+    packet[0] = "OnConsoleMessage"
+    packet[1] = "`9[`^dsc.gg/vaccatsc``]`` " .. text
+    packet.netid = -1
+    SendVarlist(packet)
+end
+
+function worm()
+SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|2914|\ncount|" .. GetItemCount(2914) .. "\n")
+Sleep(200)
+SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|3044|\ncount|" .. GetItemCount(3044) .. "\n")
+end
+function drop(id)
+    SendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. id .. "|\ncount|" .. GetItemCount(id) .. "\n")
+end
+
+function buy(id)
+    SendPacket(2, "action|buy\nitem|" .. id)
+end
+
+AddCallback("test", "OnVarlist", function(vlist)
+    if vlist[0]:find("OnTextOverlay") and vlist[1]:find("drop that") then
+		FindPath(GetLocal().pos_x // 32 - 1, GetLocal().pos_y // 32)
+	return true
+    end
+end)
+
+if pack == "fish" then
+    while GetLocal().gems > fishprice do
+for i = 0, 19 do
+        buy("fishin_pack")
+        Sleep(450)
+end
+        for _, v in ipairs(fishpack) do
+            drop(v)
+            Sleep(20)
+	worm()
+	Sleep(20)
+        end
+        Sleep(100)
+    end
+elseif pack == "paint" then
+    while GetLocal().gems > paintprice do
+        buy("paintbrush")
+        Sleep(450)
+        for _, v in ipairs(paintpack) do
+            drop(v)
+            Sleep(20)
+        end
+        Sleep(100)
+    end
+end
+

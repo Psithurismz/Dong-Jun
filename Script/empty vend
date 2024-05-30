@@ -1,0 +1,16 @@
+vendx = 9
+vendy = 53
+
+pktempt = [[
+action|dialog_return
+dialog_name|vending
+tilex|]]..vendx..[[|
+tiley|]]..vendy..[[|
+buttonClicked|pullstock
+
+setprice|0
+chk_peritem|1
+chk_perlock|0
+]]
+
+SendPacket(2, pktempt)

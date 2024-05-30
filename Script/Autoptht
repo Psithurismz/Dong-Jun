@@ -1,0 +1,31 @@
+function punch(x,y,id)
+    local v9 = {}
+    v9.type = 3
+    v9.int_data = id
+    v9.pos_x = GetLocal().pos_x
+    v9.pos_y = GetLocal().pos_y
+    v9.int_x = x
+    v9.int_y = y
+    SendPacketRaw(v9)
+end
+
+function plant()
+for _, tile in pairs(GetTiles())  do
+if tile.pos_y >= 1 and tile.pos_y <= 49 then
+    if tile.pos_y % 2 == 1 then
+        punch(tile.pos_x % 2 == 1, tile.pos_y, 998)
+Sleep(20)
+    end
+end
+end
+end
+
+while true do pcall(plant(), 1) end
+
+
+
+
+
+
+
+

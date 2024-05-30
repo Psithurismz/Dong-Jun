@@ -1,0 +1,75 @@
+worldn = "PLACE"
+
+magx = 4
+magy = 53
+
+whereubreakx = 10
+whereubreaky = 52
+
+pkt2 = [[
+action|dialog_return
+dialog_name|autofarm_settings
+autofarm_item|5640
+autofarm_activate|1
+]]
+
+pkt = [[
+action|join_request
+name|]]..worldn..[[
+
+invitedWorld|0
+]]
+function hook(varlist, packet)
+	if varlist[0]:find("OnConsoleMessage") then
+		if varlist[1]:find("would you like to go?") then
+RunThread(function()
+			Sleep(2000)
+			SendPacket(3,pkt)
+end)
+			return true
+		end
+		return false
+	end
+end
+
+AddCallback("Hook", "OnVarlist", hook)
+
+function punch(id)
+    local v9 = {}
+    v9.type = 3
+    v9.int_data = id
+    v9.pos_x = 0
+    v9.pos_y = 0
+    v9.int_x = 0
+    v9.int_y = 0
+    v9.flags = 2560
+    SendPacketRaw(v9)
+end
+
+function check()
+for _,cur in pairs(GetInventory()) do
+	if cur.id == 5640 then
+	return true
+	end
+end
+return false
+end
+
+function takemag(x,y)
+    SendPacket(2, "action|dialog_return\ndialog_name|itemsucker_block\ntilex|" .. x .. "|\ntiley|" .. y .. "|\nbuttonClicked|getplantationdevice\n")
+end
+
+while true do
+if check() == false then
+Sleep(2000)
+takemag(magx,magy)
+Sleep(5000)
+FindPath(whereubreakx,whereubreaky)
+SendPacket(2, pkt2)
+else
+punch(5640)
+Sleep(60)
+punch(18)
+end
+end
+
